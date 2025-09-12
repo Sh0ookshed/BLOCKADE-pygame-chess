@@ -4,7 +4,9 @@
 import pygame
 import os
 
-#main menu window function
+#initialisation
+pygame.init()
 
+#main menu window function
 def main_menu():
     pass

@@ -4,17 +4,17 @@
 import pygame
 import os
 
-#win scenario function
+#initialisation
+pygame.init()
 
+#win scenario function
 def you_win():
     pass
 
 #draw scenario function
-
 def you_draw():
     pass
 
 #lose scenario function
-
 def you_lose():
     pass

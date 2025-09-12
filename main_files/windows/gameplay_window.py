@@ -4,7 +4,9 @@
 import pygame
 import os
 
-#gameplay window function
+#initialisation
+pygame.init()
 
+#gameplay window function
 def gameplay():
     pass

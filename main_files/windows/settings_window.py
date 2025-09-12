@@ -4,7 +4,9 @@
 import pygame
 import os
 
-#settings menu window function
+#initialisation
+pygame.init()
 
+#settings menu window function
 def settings():
     pass

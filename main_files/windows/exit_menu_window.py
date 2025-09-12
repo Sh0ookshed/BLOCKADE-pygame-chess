@@ -4,7 +4,9 @@
 import pygame
 import os
 
-#exit menu window function
+#initialisation
+pygame.init()
 
+#exit menu window function
 def exit_menu():
     pass

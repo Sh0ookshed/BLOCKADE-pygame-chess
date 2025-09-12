@@ -4,7 +4,9 @@
 import pygame
 import os
 
-#win statistics window function
+#initialisation
+pygame.init()
 
+#win statistics window function
 def win_stats():
     pass

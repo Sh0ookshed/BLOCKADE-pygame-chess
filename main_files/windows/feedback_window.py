@@ -4,7 +4,9 @@
 import pygame
 import os
 
-#feedback window function
+#initialisation
+pygame.init()
 
+#feedback window function
 def feedback():
     pass
