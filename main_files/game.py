@@ -2,7 +2,7 @@
 
 #libraries
 import pygame
-import os
+import sys
 
 #file imports
 from windows.end_of_game_windows import you_win,you_draw,you_lose
@@ -22,3 +22,6 @@ current_w, current_h = resolution.current_w, resolution.current_h
 
 #main code
 main_menu() #always open to main menu first
+
+pygame.quit()
+sys.exit()

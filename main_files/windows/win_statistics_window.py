@@ -2,7 +2,7 @@
 
 #libaries
 import pygame
-import os
+import sys
 
 #initialisation
 pygame.init()
