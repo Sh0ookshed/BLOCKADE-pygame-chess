@@ -18,7 +18,7 @@ pygame.init()
 
 #globals
 resolution = pygame.display.Info()
-screen_w, screen_h = resolution.current_w, resolution.current_h
+current_w, current_h = resolution.current_w, resolution.current_h
 
 #main code
-main_menu()
+main_menu() #always open to main menu first
