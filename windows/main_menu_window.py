@@ -4,6 +4,9 @@
 import pygame
 import sys
 
+#other file imports
+from utils.button import Button
+
 #initialisation
 pygame.init()
 
@@ -18,4 +21,4 @@ def main_menu():
     while active:
         for event in pygame.event.get():
             if event.type == pygame.QUIT():    #also need to work out how to down the whole program from exit
-                active = False
+                sys.exit()
