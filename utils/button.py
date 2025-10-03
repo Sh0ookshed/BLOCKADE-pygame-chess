@@ -22,8 +22,6 @@ class Button:
         #variable attributes
         self.text = text
         self.button_rect = pygame.Rect(button_rect)
-        print("DEBUG: rect created:", self.button_rect)
-
         self.font = font
         self.normal_colour = normal_colour
         self.hover_colour = hover_colour
@@ -36,8 +34,6 @@ class Button:
         #text that will be on the button + the text rectangle that can blit onto the button rectangle
         self.text_surface = self.font.render(self.text,True, self.text_colour)
         self.text_surface_rect = self.text_surface.get_rect(center = self.button_rect.center)
-        print("DEBUG: text surface rect:", self.text_surface_rect)
-
 
     #methods    
     def detect_mouse(self,mouse_pos): #method for detecting if the mouse is over the button or not
