@@ -6,22 +6,19 @@ import pygame
 #initialisation
 pygame.init()
 
-#global variables
-normal_colour = (100, 255, 200) #kinda turqoise
-
-hover_colour =(102,255,102) #light green
-
-text_colour =(255,255,255) #completely white
-
 #button class
 class Button:
 
     #attributes
-    def __init__(self,text,button_rect,font,normal_colour,hover_colour,text_colour):
+    def __init__(self,text,window_width,window_height,button_x,button_y,button_w,button_h,font,normal_colour,hover_colour,text_colour):
 
         #variable attributes
         self.text = text
-        self.button_rect = pygame.Rect(button_rect)
+        self.button_x = button_x
+        self.button_y = button_y
+        self.button_w = button_w
+        self.button_h = button_h
+        self.button_rect = pygame.Rect((window_width*button_x,window_height*button_y,window_width*button_w,window_height*button_h))
         self.font = font
         self.normal_colour = normal_colour
         self.hover_colour = hover_colour
@@ -34,7 +31,7 @@ class Button:
         #text that will be on the button + the text rectangle that can blit onto the button rectangle
         self.text_surface = self.font.render(self.text,True, self.text_colour)
         self.text_surface_rect = self.text_surface.get_rect(center = self.button_rect.center)
-
+        
     #methods    
     def detect_mouse(self,mouse_pos): #method for detecting if the mouse is over the button or not
         self.hover = self.button_rect.collidepoint(mouse_pos)
@@ -53,3 +50,8 @@ class Button:
             button_colour = self.hover_colour
         pygame.draw.rect(window_surface,button_colour,self.button_rect)
         window_surface.blit(self.text_surface,self.text_surface_rect)
+
+    def resize(self,width,height,font):
+        self.button_rect = pygame.Rect((width*self.button_x,height*self.button_y,width*self.button_w,height*self.button_h))
+        self.text_surface = font.render(self.text,True, self.text_colour)
+        self.text_surface_rect = self.text_surface.get_rect(center = self.button_rect.center)

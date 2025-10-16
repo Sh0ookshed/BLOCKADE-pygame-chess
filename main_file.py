@@ -9,13 +9,14 @@ from windows.main_menu_window import main_menu
 
 #initialisation
 pygame.init()
+resolution = pygame.display.Info()
 
 #globals
-resolution = pygame.display.Info()
 current_w, current_h = resolution.current_w, resolution.current_h
+#current_w, current_h = 1200,600
 
 #main code
-main_menu() #always open to main menu first
+main_menu(current_w,current_h) #always open to main menu first
 
 pygame.quit()
 sys.exit()
