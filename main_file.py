@@ -13,7 +13,7 @@ resolution = pygame.display.Info()
 
 #globals
 current_w, current_h = resolution.current_w, resolution.current_h
-#current_w, current_h = 1200,600
+#current_w, current_h = 1280,800
 
 #main code
 main_menu(current_w,current_h) #always open to main menu first

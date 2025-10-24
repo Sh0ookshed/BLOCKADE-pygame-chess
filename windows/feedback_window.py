@@ -6,7 +6,7 @@ import sys
 
 #other file imports
 from utils.scalable_font import scaled_font
-from utils.button import Button
+from utils.UI.button import Button
 from resources.colours import *
 
 #initialisation

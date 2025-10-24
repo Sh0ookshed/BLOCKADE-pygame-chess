@@ -9,7 +9,8 @@ from windows.gameplay_window import gameplay
 from windows.settings_window import settings
 from windows.win_statistics_window import win_stats
 from utils.scalable_font import scaled_font
-from utils.button import Button
+from utils.UI.display_box import Display_box
+from utils.UI.button import Button
 from utils.random_pick import rand_item
 from resources.colours import *
 from resources.chess_tips import advice_list
@@ -22,7 +23,7 @@ def main_menu(cw,ch):
 
     #display configs
     window = pygame.display.set_mode((cw,ch)) #PLACEHOLDER VALUES this will 100% change bc of settings and resizing
-
+    
     pygame.display.set_caption("BLOCKADE (main menu)") #allows user to see game name and be clear what window they are in
 
     #creating buttons
@@ -36,10 +37,10 @@ def main_menu(cw,ch):
 
     advice_button = Button(rand_item(advice_list),cw,ch, 0.45, 0.499 ,0.5, 0.433,scaled_font(ch),DARKBLUE,LIGHTBLUE,WHITE)
 
-    logo_placeholder = Button("LOGO GOES HERE",cw,ch, 0.45, 0.033, 0.5, 0.433,scaled_font(ch),DARKBLUE,DARKBLUE,WHITE)
+    logo_placeholder = Display_box("LOGO GOES HERE",cw,ch, 0.45, 0.033, 0.5, 0.433,scaled_font(ch),DARKBLUE,WHITE)
 
     #creating list of buttons
-    button_list = [play_button,win_stats_button,settings_menu_button,exit_button,advice_button,logo_placeholder]
+    button_list = [play_button,win_stats_button,settings_menu_button,exit_button,advice_button]
 
     #window loop
     active = True
@@ -90,6 +91,8 @@ def main_menu(cw,ch):
         #drawing
         window.fill((0,0,0))
         for b in button_list:
-            b.button_draw(window)
+            b.b_draw(window)
+
+        logo_placeholder.b_draw(window)
         
         pygame.display.update()

@@ -6,7 +6,7 @@ import sys
 
 #other file imports
 from utils.scalable_font import scaled_font
-from utils.button import Button
+from utils.UI.button import Button
 from resources.colours import *
 
 #initialisation
@@ -42,6 +42,6 @@ def win_stats(cw,ch):
         #drawing
         window.fill((0,0,0))
         for b in button_list:
-            b.button_draw(window)
+            b.b_draw(window)
 
         pygame.display.update()
