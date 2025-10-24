@@ -1,6 +1,13 @@
-#colours file that contains all of the RGB values for the colours that will be used for different assets / utils
+#------------------------------------------------------------------------------
+#COLOURS
+#------------------------------------------------------------------------------
 
-#all colours that will be used (tuple numbers are RGB values because thats what pygame understands)
+#Colours file that contains all of the RGB values for the colours that will be used for different assets / utils.
+#All colours that will be used (tuple numbers are RGB values because thats what pygame understands).
+
+#------------------------------------------------------------------------------
+#Main colours
+#------------------------------------------------------------------------------
 WHITE = (255,255,255)
 
 DARKBLUE = (102, 102, 255)

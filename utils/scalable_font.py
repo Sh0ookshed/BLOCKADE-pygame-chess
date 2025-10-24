@@ -1,12 +1,20 @@
-#this file contains the function / variable for the scalable font that changes size based on resolution
+#------------------------------------------------------------------------------
+#SCALABLE FONT
+#------------------------------------------------------------------------------
 
+#Contains the function for the scalable font that changes size depending on window size.
+
+#------------------------------------------------------------------------------
 #libraries
-import pygame
+#------------------------------------------------------------------------------
+import pygame #GUI
 
 #initialisation
-pygame.init()
+pygame.init() 
 
-#function for making sure the font is a proportional size to window
+#------------------------------------------------------------------------------
+#Scalable font function
+#------------------------------------------------------------------------------
 def scaled_font(height):
-    font = pygame.font.Font(None,int(height*0.08))
+    font = pygame.font.Font(None,int(height*0.08))  #font size is 8% of the height of the window.
     return font

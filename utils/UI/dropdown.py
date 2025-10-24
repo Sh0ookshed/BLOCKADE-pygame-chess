@@ -1,19 +1,33 @@
-#file for the dropdown class which will be a dropdown button menu that will be used within my settings menu
+#------------------------------------------------------------------------------
+#DROPDOWN
+#------------------------------------------------------------------------------
 
+#file for the dropdown button class which will be a dropdown button menu that will be used within the settings menu
+#and possibly other things within the software.
+
+#------------------------------------------------------------------------------
 #libaries
-import pygame
-import sys
+#------------------------------------------------------------------------------
+import pygame #GUI
+import sys #Clean shutdown
 
-#other file imports
+#------------------------------------------------------------------------------
+#File imports
+#------------------------------------------------------------------------------
 from utils.UI.button import Button
 
+#------------------------------------------------------------------------------
 #initialisation
+#------------------------------------------------------------------------------
 pygame.init()
 
+#------------------------------------------------------------------------------
 #dropdown button class
+#------------------------------------------------------------------------------
+
 class dropdown_button(Button):
-    def __init__(self, text, window_width, window_height, box_x, box_y, box_w, box_h, font, box_colour, hover_colour, text_colour):
-        super().__init__(text, window_width, window_height, box_x, box_y, box_w, box_h, font, box_colour, hover_colour, text_colour)
+    def __init__(self, text, window_width, window_height, box_x, box_y, box_w, box_h, font, box_colour, hover_colour, text_colour): #All parameters that need to be entered.
+        super().__init__(text, window_width, window_height, box_x, box_y, box_w, box_h, font, box_colour, hover_colour, text_colour) #Parameters that inherit from parent class (Button).
 
         #variable attributes
         self.open_text = self.text+"<"
@@ -25,22 +39,19 @@ class dropdown_button(Button):
         self.opened = False
 
 
-
-
-
-
-    def check_for_click(self,events): #method to see if the button has been clicked by the mouse
+    #methods
+    def check_for_click(self,events): #Method to see if the button has been clicked by the mouse edited to now control whether the dropdown is open or not.
         self.clicked = False
         for event in events:
-            if event.type == pygame.MOUSEBUTTONDOWN and event.button == 1: # 1 is left mouse button in pygame
-                if self.hover == True and self.opened ==True:
+            if event.type == pygame.MOUSEBUTTONDOWN and event.button == 1: # 1 is left mouse button in pygame.
+                if self.hover == True and self.opened ==True:   #Closes the dropdown if it is open.
                     self.clicked = True
                     self.opened = False
                     self.text_surface = self.font.render(self.close_text,True, self.text_colour)
                     self.text_surface_rect = self.text_surface.get_rect(center = self.box_rect.center)
                     return self.clicked, self.opened
 
-                elif self.hover == True:
+                elif self.hover == True: #Opens the dropdown if it is closed
                     self.clicked = True
                     self.opened = True
                     self.text_surface = self.font.render(self.open_text,True, self.text_colour)
@@ -48,20 +59,17 @@ class dropdown_button(Button):
                     return self.clicked, self.opened
 
 
-
-
-
-    def drop(self,dropdown_list,window_surface,mouse_pos,events):
+    def drop(self,dropdown_list,window_surface,mouse_pos,events): #This method is the actual method that creates the dropdown menu.
         current_y= self.box_y
         dropbox_list = []
         current_option = self.text
         self.open_text = self.text+"<"
         self.close_text = self.text+">"
 
-        if self.window_height > (self.box_y*self.window_height) + (self.box_h*self.window_height) + (self.box_h*0.5*len(dropdown_list)*self.window_height):
+        if self.window_height > (self.box_y*self.window_height) + (self.box_h*self.window_height) + (self.box_h*0.5*len(dropdown_list)*self.window_height): #Checks if the dropdown menu has enough room below it. If it doesnt it attempts to use the space above it
 
             for x, option in enumerate(dropdown_list):
-                if str(option) == str(current_option):
+                if str(option) == str(current_option): #If the current choice in the dropdown is the same as the selected choice then it will say (current) next to it.
                     chosen_index = x
                     dropbox_list.append(Button(f"{option} (current)", self.window_width,self.window_height, self.box_x, current_y+self.box_h, self.box_w, self.box_h/2, self.font, self.box_colour, self.hover_colour, self.text_colour))
                     current_y += (self.box_h/2)
@@ -80,18 +88,18 @@ class dropdown_button(Button):
                     dropbox_list.append(Button(f"{option}", self.window_width,self.window_height, self.box_x, current_y-(self.box_h/2), self.box_w, self.box_h/2, self.font, self.box_colour, self.hover_colour, self.text_colour))
                     current_y -=(self.box_h/2)
 
-        for n, d in enumerate(dropbox_list):
+        for n, d in enumerate(dropbox_list): #Allows individual dropdown boxes (that are created when the main box is clicked) to be able to be clicked and respond to the mouse.
             d.detect_mouse(mouse_pos)
             d.check_for_click(events)
             d.b_draw(window_surface)
 
             if d.clicked == True:
                 self.text = str(dropdown_list[n])
-                self.close_text = self.text+">"
+                self.close_text = self.text+">"       #> Means the dropdown is closed and < means the dropdown is open
                 self.open_text = self.text+"<"
                 self.text_surface = self.font.render(self.close_text,True, self.text_colour)
                 self.text_surface_rect = self.text_surface.get_rect(center = self.box_rect.center)
                 self.opened = False
                 chosen_index = n
 
-        return chosen_index
+        return chosen_index #Returns the index of the chosen dropdown option. This means that the value in the original list that links to the chosen index can be chosen and therefore be used for a functionality such as choosing an new chess clock time or resolution.

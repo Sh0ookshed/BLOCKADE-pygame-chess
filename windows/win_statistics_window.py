@@ -1,47 +1,61 @@
-#contains the function for the win statistics window
+#------------------------------------------------------------------------------
+#WIN STATISTICS WINDOW
+#------------------------------------------------------------------------------
 
+#This window contains the win statistics for the user. It will display the user's
+#wins, draws (stalemates), and losses.
+
+#------------------------------------------------------------------------------
 #libaries
-import pygame
-import sys
+#------------------------------------------------------------------------------s
+import pygame #GUI
+import sys    #Clean shutdown.
 
-#other file imports
-from utils.scalable_font import scaled_font
-from utils.UI.button import Button
+#------------------------------------------------------------------------------
+#File imports
+#------------------------------------------------------------------------------
+from utils.scalable_font import scaled_font #Font is proportional to window size.
+from utils.UI.button import Button #b
 from resources.colours import *
 
-#initialisation
-pygame.init()
+#------------------------------------------------------------------------------
+#Initialisation
+#------------------------------------------------------------------------------
+pygame.init() #Pygame requires
 
-#win statistics window function
-def win_stats(cw,ch):
-    #display configs
-    window = pygame.display.set_mode((cw,ch)) #PLACEHOLDER VALUES this will 100% change bc of settings and resizing
-    pygame.display.set_caption("BLOCKADE (win statistics)") #allows user to see game name and be clear what window they are in
+#------------------------------------------------------------------------------
+#Win statistics window function
+#------------------------------------------------------------------------------
+def win_stats(cw,ch): #The parameters: cw = Current width, ch = Current height (Referring to the size of the display).
+
+    #Display configs
+    window = pygame.display.set_mode((cw,ch)) #Sets the size of the window to be the current width and height.
+    pygame.display.set_caption("BLOCKADE (win statistics)") #Allows user to see game name to be clear what window they are in.
     
     #creating buttons
-    return_button = Button("return to main menu",cw,ch, 0.4, 0.4, 0.2, 0.2,scaled_font(ch),DARKBLUE,LIGHTBLUE,WHITE)
+    return_button = Button("return to main menu",cw,ch, 0.4, 0.4, 0.2, 0.2,scaled_font(ch),DARKBLUE,LIGHTBLUE,WHITE) #Button that lets the user return to the main menu.
 
-    button_list = [return_button]
+    button_list = [return_button] #Button list lets the program loop through buttons to iteratively draw and interact with them.
 
-    #window loop
+    #window loop #While the variable "active" is true the win statistics function won't end unless forcefully exited.
     active = True
     while active:
-        event_handler = pygame.event.get()
-        mouse_position = pygame.mouse.get_pos()
+        event_handler = pygame.event.get() #The event handler checks through every single possible pygame event.
+        mouse_position = pygame.mouse.get_pos() #Allows the tracking of the mouse position.
         for event in event_handler:
-            if event.type == pygame.QUIT:    
+            if event.type == pygame.QUIT:    #If you click on the X in the top right it will exit the software.
                 sys.exit()
         
-        for b in button_list:
+        for b in button_list:  #Loop through every button to give each one a unique function.
             b.detect_mouse(mouse_position)
-            b.check_for_click(event_handler)
+            b.check_for_click(event_handler) #Check for where the mouse is and if it has clicked the button.
             if b.clicked == True:
                 if b == return_button:
-                    return (cw,ch)
+                    return (cw,ch)  #Updates the resolution in main menu so the windows are the same size.
             
         #drawing
-        window.fill((0,0,0))
+        window.fill((0,0,0))  #fill in the background
         for b in button_list:
-            b.b_draw(window)
+            b.b_draw(window) #loop through all of the buttons and draw them onto the window
 
-        pygame.display.update()
+        pygame.display.update() #Updates the frames in the window.

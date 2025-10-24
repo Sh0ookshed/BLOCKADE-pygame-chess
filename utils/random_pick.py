@@ -1,8 +1,14 @@
-#chooses a random item from a single dimensional list (basically for the chess tips file)
+#------------------------------------------------------------------------------
+#RANDOM PICK
+#------------------------------------------------------------------------------
 
+#------------------------------------------------------------------------------
 #libraries
-import random
+#------------------------------------------------------------------------------
+import random 
 
+#------------------------------------------------------------------------------
 #random pick function
+#------------------------------------------------------------------------------
 def rand_item(pick_list):
-    return random.choice(pick_list)
+    return random.choice(pick_list) #Choose something random within the list given in the paremeter.
