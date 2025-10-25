@@ -29,13 +29,13 @@ pygame.init()
 #------------------------------------------------------------------------------
 #settings menu window function
 #------------------------------------------------------------------------------
-def settings(cw,ch):
+def settings(cw,ch): #The parameters: cw = Current width, ch = Current height (Referring to the size of the display).
 
     #important locals
     audio_level = 50 #How high the audio level will be (0 to 100). The default will be 50 upon opening (will change when data saving is implemented)
     
     #display configs
-    window = pygame.display.set_mode((cw,ch)) #The parameters: cw = Current width, ch = Current height (Referring to the size of the display).
+    window = pygame.display.set_mode((cw,ch)) 
     pygame.display.set_caption("BLOCKADE (settings)") #Allows user to see game name and be clear what window they are in.
     
     #creating display boxes
