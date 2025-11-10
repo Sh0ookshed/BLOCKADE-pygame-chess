@@ -15,10 +15,13 @@ import sys    #Clean shutdown
 from windows.gameplay_window import gameplay #Importing the windows.
 from windows.settings_window import settings
 from windows.win_statistics_window import win_stats
+
 from utils.scalable_font import scaled_font #Font is proportional to window size.
-from utils.UI.display_box import Display_box
-from utils.UI.button import Button                 
 from utils.random_pick import rand_item
+
+from utils.UI.display_box import Display_box
+from utils.UI.button import Button                
+
 from resources.colours import *
 from resources.chess_tips import advice_list #This list just contains loads of tips/hints for the random generator.
 
@@ -30,26 +33,26 @@ pygame.init()
 #------------------------------------------------------------------------------
 #main menu window function
 #------------------------------------------------------------------------------
-def main_menu(cw,ch): #The parameters: cw = Current width, ch = Current height (Referring to the size of the display).
-
+def main_menu(current_settings): #The parameters: cw = Current width, ch = Current height (Referring to the size of the display).
+    
     #display configs
-    window = pygame.display.set_mode((cw,ch)) #Sets the size of the window to be the current width and height.
+    window = pygame.display.set_mode((current_settings.window_width, current_settings.window_height)) #Sets the size of the window to be the current width and height.
     pygame.display.set_caption("BLOCKADE (main menu)") #Allows user to see game name and be clear what window they are in.
 
     #creating buttons
-    play_button = Button("play",cw,ch, 0.025, 0.033, 0.4, 0.2,scaled_font(ch),DARKBLUE,LIGHTBLUE,WHITE) #Takes the user to the gameplay window.
+    play_button = Button("play",current_settings.window_width, current_settings.window_height, 0.025, 0.033, 0.4, 0.2,scaled_font(current_settings.window_height),DARKBLUE,LIGHTBLUE,WHITE) #Takes the user to the gameplay window.
 
-    win_stats_button = Button("view win statistics",cw,ch, 0.025, 0.266, 0.4, 0.2,scaled_font(ch),DARKBLUE,LIGHTBLUE,WHITE) #Takes the user to the win statistics window.
+    win_stats_button = Button("view win statistics",current_settings.window_width, current_settings.window_height, 0.025, 0.266, 0.4, 0.2,scaled_font(current_settings.window_height),DARKBLUE,LIGHTBLUE,WHITE) #Takes the user to the win statistics window.
 
-    settings_menu_button = Button("settings",cw,ch, 0.025, 0.499, 0.4, 0.2,scaled_font(ch),DARKBLUE,LIGHTBLUE,WHITE) #Takes the user to the settings window.
+    settings_menu_button = Button("settings",current_settings.window_width, current_settings.window_height, 0.025, 0.499, 0.4, 0.2,scaled_font(current_settings.window_height),DARKBLUE,LIGHTBLUE,WHITE) #Takes the user to the settings window.
 
-    exit_button = Button("exit",cw,ch, 0.025, 0.732, 0.4, 0.2,scaled_font(ch),DARKBLUE,LIGHTBLUE,WHITE) #Shuts down the program 
+    exit_button = Button("exit",current_settings.window_width, current_settings.window_height, 0.025, 0.732, 0.4, 0.2,scaled_font(current_settings.window_height),DARKBLUE,LIGHTBLUE,WHITE) #Shuts down the program 
 
-    advice_button = Button(rand_item(advice_list),cw,ch, 0.45, 0.499 ,0.5, 0.433,scaled_font(ch),DARKBLUE,LIGHTBLUE,WHITE) #Shows random chess tips and facts to the user. (Can be clicked to update)
+    advice_button = Button(rand_item(advice_list),current_settings.window_width, current_settings.window_height, 0.45, 0.499 ,0.5, 0.433,scaled_font(current_settings.window_height),DARKBLUE,LIGHTBLUE,WHITE) #Shows random chess tips and facts to the user. (Can be clicked to update)
 
-    logo_placeholder = Display_box("LOGO GOES HERE",cw,ch, 0.45, 0.033, 0.5, 0.433,scaled_font(ch),DARKBLUE,WHITE) #placeholder
+    logo_placeholder = Display_box("LOGO GOES HERE",current_settings.window_width, current_settings.window_height, 0.45, 0.033, 0.5, 0.433,scaled_font(current_settings.window_height),DARKBLUE,WHITE) #placeholder
 
-    #creating list of buttons
+    #lists for easy management and drawing
     button_list = [play_button,win_stats_button,settings_menu_button,exit_button,advice_button] #Button list lets the program loop through buttons to iteratively draw and interact with them.
 
     #window loop #While the variable "active" is true the win statistics function won't end unless forcefully exited.
@@ -62,38 +65,37 @@ def main_menu(cw,ch): #The parameters: cw = Current width, ch = Current height (
             if event.type == pygame.QUIT:    #If you click on the X in the top right it will exit the software.
                 sys.exit()
         
-        for b in button_list:     #Loop through every button to give each one a unique function.
+        for b in button_list:   #Loop through every button to give each one a unique function.
             b.detect_mouse(mouse_position)
             b.check_for_click(event_handler) #Check for where the mouse is and if it has clicked the button.
             if b.clicked == True:
 
                 if b == play_button:
-                    window = pygame.display.set_mode(gameplay(cw,ch)) #Updates the resolution in main menu after returning from the relevant window so the windows are the same size.
+                    current_settings = gameplay(current_settings)
+                    window = pygame.display.set_mode((current_settings.window_width, current_settings.window_height)) #Updates the resolution in main menu after returning from the relevant window so the windows are the same size.
                     cw = pygame.display.get_surface().get_width() #Updates the current width variable to be the same as the actual width
                     ch = pygame.display.get_surface().get_height() #Updates the current height variable to be the same as the actual height
                     for r in button_list:
-                        r.resize(cw,ch,scaled_font(ch)) #Update all buttons to be proportional to the new resolution.
+                        r.resize(current_settings.window_width, current_settings.window_height,scaled_font(current_settings.window_height)) #Update all buttons to be proportional to the new resolution.
                     pygame.display.set_caption("BLOCKADE (main menu)") #Makes sure the caption returns to Blockade (main menu)
 
                 elif b == win_stats_button:
-                    window = pygame.display.set_mode(win_stats(cw,ch)) 
-                    cw = pygame.display.get_surface().get_width() 
-                    ch = pygame.display.get_surface().get_height() 
+                    current_settings = win_stats(current_settings)
+                    window = pygame.display.set_mode((current_settings.window_width, current_settings.window_height)) 
                     for r in button_list:
-                        r.resize(cw,ch,scaled_font(ch)) #Update all buttons to be proportional to the new resolution.
+                        r.resize(current_settings.window_width, current_settings.window_height,scaled_font(current_settings.window_height)) #Update all buttons to be proportional to the new resolution.
                     pygame.display.set_caption("BLOCKADE (main menu)")
 
                 elif b == settings_menu_button:
-                    window = pygame.display.set_mode(settings(cw,ch)) 
-                    cw = pygame.display.get_surface().get_width() 
-                    ch = pygame.display.get_surface().get_height() 
+                    current_settings = settings(current_settings)
+                    window = pygame.display.set_mode((current_settings.window_width, current_settings.window_height))  
                     for r in button_list:
-                        r.resize(cw,ch,scaled_font(ch)) #Update all buttons to be proportional to the new resolution.
+                        r.resize(current_settings.window_width, current_settings.window_height,scaled_font(current_settings.window_height)) #Update all buttons to be proportional to the new resolution.
                     pygame.display.set_caption("BLOCKADE (main menu)")
 
                 elif b == advice_button:
                     b.text = rand_item(advice_list)
-                    b.text_surface = scaled_font(ch).render(b.text,True,WHITE) #When the button is clicked a new random hint / tip is generated.
+                    b.text_surface = scaled_font(current_settings.window_height).render(b.text,True,WHITE) #When the button is clicked a new random hint / tip is generated.
 
                 elif b == exit_button:
                     sys.exit() #Exit the software if this button is clicked.

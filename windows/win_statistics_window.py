@@ -27,26 +27,26 @@ pygame.init() #Pygame requires
 #------------------------------------------------------------------------------
 #Win statistics window function
 #------------------------------------------------------------------------------
-def win_stats(cw,ch): #The parameters: cw = Current width, ch = Current height (Referring to the size of the display).
+def win_stats(current_settings): #The parameters: cw = Current width, ch = Current height (Referring to the size of the display).
 
     #important locals
     placeholder_number = 0
 
     #Display configs
-    window = pygame.display.set_mode((cw,ch)) #Sets the size of the window to be the current width and height.
+    window = pygame.display.set_mode((current_settings.window_width, current_settings.window_height)) #Sets the size of the window to be the current width and height.
     pygame.display.set_caption("BLOCKADE (win statistics)") #Allows user to see game name to be clear what window they are in.
     
     #creating display boxes
-    win_stats_title_db = Display_box("WIN STATISTICS",cw,ch,0.25,0.1,0.5,0.1,scaled_font(ch),DARKBLUE,WHITE) #Title at the top of the screen
+    win_stats_title_db = Display_box("WIN STATISTICS",current_settings.window_width, current_settings.window_height,0.25,0.1,0.5,0.1,scaled_font(current_settings.window_height),DARKBLUE,WHITE) #Title at the top of the screen
 
-    wins_db = Display_box(f"WINS:{placeholder_number}",cw,ch,0.05,0.225,0.3,0.6,scaled_font(ch),DARKBLUE,WHITE)
+    wins_db = Display_box(f"WINS:{placeholder_number}",current_settings.window_width, current_settings.window_height,0.05,0.225,0.3,0.6,scaled_font(current_settings.window_height),DARKBLUE,WHITE)
 
-    draws_db = Display_box(f"DRAWS:{placeholder_number}",cw,ch,0.35,0.225,0.3,0.6,scaled_font(ch),DARKBLUE,WHITE)    #Big boxes showing win amount, draw amount and loss amount.
+    draws_db = Display_box(f"DRAWS:{placeholder_number}",current_settings.window_width, current_settings.window_height,0.35,0.225,0.3,0.6,scaled_font(current_settings.window_height),DARKBLUE,WHITE)    #Big boxes showing win amount, draw amount and loss amount.
 
-    losses_db = Display_box(f"LOSSES:{placeholder_number}",cw,ch,0.64,0.225,0.3,0.6,scaled_font(ch),DARKBLUE,WHITE)
+    losses_db = Display_box(f"LOSSES:{placeholder_number}",current_settings.window_width, current_settings.window_height,0.64,0.225,0.3,0.6,scaled_font(current_settings.window_height),DARKBLUE,WHITE)
 
     #creating buttons
-    return_button = Button("return to main menu",cw,ch, 0.25, 0.85, 0.5, 0.1,scaled_font(ch),DARKBLUE,LIGHTBLUE,WHITE) #Button that lets the user return to the main menu.
+    return_button = Button("return to main menu",current_settings.window_width, current_settings.window_height, 0.25, 0.85, 0.5, 0.1,scaled_font(current_settings.window_height),DARKBLUE,LIGHTBLUE,WHITE) #Button that lets the user return to the main menu.
    
     #lists for easy management and drawing
     display_box_list = [win_stats_title_db, wins_db, draws_db, losses_db] #Display box list lets the program loop through display boxes to iteratively draw them.
@@ -67,7 +67,7 @@ def win_stats(cw,ch): #The parameters: cw = Current width, ch = Current height (
             b.check_for_click(event_handler) #Check for where the mouse is and if it has clicked the button.
             if b.clicked == True:
                 if b == return_button:
-                    return (cw,ch)  #Updates the resolution in main menu so the windows are the same size.
+                    return (current_settings)  #Updates the resolution in main menu so the windows are the same size.
             
         #drawing
         window.fill((0,0,0))  #fill in the background
