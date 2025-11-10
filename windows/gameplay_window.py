@@ -41,6 +41,10 @@ def gameplay(current_settings):  #The parameters: cw = Current width, ch = Curre
     window = pygame.display.set_mode((current_settings.window_width, current_settings.window_height)) ##Sets the size of the window to be the current width and height.
     pygame.display.set_caption("BLOCKADE (gameplay)") #Allows user to see game name and be clear what window they are in.
     
+    #loading assets
+    background = pygame.image.load("assets/BLOCKADE BACKGROUND.png").convert()
+    background = pygame.transform.scale(background, (current_settings.window_width, current_settings.window_height))
+        
     #creating display boxes
     feedback_display_placeholder = Display_box("feedback placeholder",current_settings.window_width, current_settings.window_height, 0.675, 0.3, 0.3, 0.475,scaled_font(current_settings.window_height),DARKBLUE,WHITE)
 
@@ -75,8 +79,7 @@ def gameplay(current_settings):  #The parameters: cw = Current width, ch = Curre
                     return (current_settings)
             
         #drawing
-        window.fill((0,0,0)) #fill in the background
-        chess_board_surface.fill((125,100,0))
+        window.blit(background, (0,0)) #fill in the background
 
         for b in button_list: #loop through all of the buttons and draw them onto the window.
             b.b_draw(window)

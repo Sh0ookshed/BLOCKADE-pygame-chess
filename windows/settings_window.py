@@ -37,6 +37,10 @@ def settings(current_settings): #The parameters: cw = Current width, ch = Curren
     window = pygame.display.set_mode((current_settings.window_width, current_settings.window_height)) 
     pygame.display.set_caption("BLOCKADE (settings)") #Allows user to see game name and be clear what window they are in.
     
+    #loading assets
+    background = pygame.image.load("assets/BLOCKADE BACKGROUND.png").convert()
+    background = pygame.transform.scale(background, (current_settings.window_width, current_settings.window_height))
+    
     #creating display boxes
     resolution_db = Display_box("RESOLUTION:",current_settings.window_width, current_settings.window_height, 0.025, 0.033, 0.4, 0.15,scaled_font(current_settings.window_height),DARKBLUE,WHITE) #Display box that points towards resolution button.
 
@@ -131,7 +135,7 @@ def settings(current_settings): #The parameters: cw = Current width, ch = Curren
 
 
         #drawing
-        window.fill((0,0,0)) #fill in the background
+        window.blit(background, (0,0)) #fill in the background
 
         for b in button_list: #loop through all of the buttons and draw them onto the window.
             b.b_draw(window)

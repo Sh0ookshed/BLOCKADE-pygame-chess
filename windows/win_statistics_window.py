@@ -36,6 +36,10 @@ def win_stats(current_settings): #The parameters: cw = Current width, ch = Curre
     window = pygame.display.set_mode((current_settings.window_width, current_settings.window_height)) #Sets the size of the window to be the current width and height.
     pygame.display.set_caption("BLOCKADE (win statistics)") #Allows user to see game name to be clear what window they are in.
     
+    #loading assets
+    background = pygame.image.load("assets/BLOCKADE BACKGROUND.png").convert()
+    background = pygame.transform.scale(background, (current_settings.window_width, current_settings.window_height))
+    
     #creating display boxes
     win_stats_title_db = Display_box("WIN STATISTICS",current_settings.window_width, current_settings.window_height,0.25,0.1,0.5,0.1,scaled_font(current_settings.window_height),DARKBLUE,WHITE) #Title at the top of the screen
 
@@ -70,7 +74,8 @@ def win_stats(current_settings): #The parameters: cw = Current width, ch = Curre
                     return (current_settings)  #Updates the resolution in main menu so the windows are the same size.
             
         #drawing
-        window.fill((0,0,0))  #fill in the background
+        window.blit(background, (0,0))  #fill in the background
+        
         for b in button_list:
             b.b_draw(window) #loop through all of the buttons and draw them onto the window
 

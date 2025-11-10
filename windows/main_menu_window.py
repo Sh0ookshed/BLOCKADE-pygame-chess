@@ -38,6 +38,16 @@ def main_menu(current_settings): #The parameters: cw = Current width, ch = Curre
     #display configs
     window = pygame.display.set_mode((current_settings.window_width, current_settings.window_height)) #Sets the size of the window to be the current width and height.
     pygame.display.set_caption("BLOCKADE (main menu)") #Allows user to see game name and be clear what window they are in.
+    
+    #loading assets
+    background = pygame.image.load("assets/BLOCKADE BACKGROUND.png").convert()
+    background = pygame.transform.scale(background, (current_settings.window_width, current_settings.window_height))
+    
+    logo = pygame.image.load("assets/BLOCKADE LOGO.png").convert()
+    logo = pygame.transform.scale(logo, (current_settings.window_width*0.5, current_settings.window_height*0.433))
+    
+    #creating display boxes
+    advice_db = Display_box("Useful hints and tricks:", current_settings.window_width, current_settings.window_height, 0.45, 0.499 ,0.5, 0.1,scaled_font(current_settings.window_height),DARKBLUE,WHITE)
 
     #creating buttons
     play_button = Button("play",current_settings.window_width, current_settings.window_height, 0.025, 0.033, 0.4, 0.2,scaled_font(current_settings.window_height),DARKBLUE,LIGHTBLUE,WHITE) #Takes the user to the gameplay window.
@@ -48,11 +58,11 @@ def main_menu(current_settings): #The parameters: cw = Current width, ch = Curre
 
     exit_button = Button("exit",current_settings.window_width, current_settings.window_height, 0.025, 0.732, 0.4, 0.2,scaled_font(current_settings.window_height),DARKBLUE,LIGHTBLUE,WHITE) #Shuts down the program 
 
-    advice_button = Button(rand_item(advice_list),current_settings.window_width, current_settings.window_height, 0.45, 0.499 ,0.5, 0.433,scaled_font(current_settings.window_height),DARKBLUE,LIGHTBLUE,WHITE) #Shows random chess tips and facts to the user. (Can be clicked to update)
-
-    logo_placeholder = Display_box("LOGO GOES HERE",current_settings.window_width, current_settings.window_height, 0.45, 0.033, 0.5, 0.433,scaled_font(current_settings.window_height),DARKBLUE,WHITE) #placeholder
+    advice_button = Button(rand_item(advice_list),current_settings.window_width, current_settings.window_height, 0.45, 0.599 ,0.5, 0.333,scaled_font(current_settings.window_height),DARKBLUE,LIGHTBLUE,WHITE) #Shows random chess tips and facts to the user. (Can be clicked to update)
 
     #lists for easy management and drawing
+    display_box_list = [advice_db]
+    
     button_list = [play_button,win_stats_button,settings_menu_button,exit_button,advice_button] #Button list lets the program loop through buttons to iteratively draw and interact with them.
 
     #window loop #While the variable "active" is true the win statistics function won't end unless forcefully exited.
@@ -77,6 +87,11 @@ def main_menu(current_settings): #The parameters: cw = Current width, ch = Curre
                     ch = pygame.display.get_surface().get_height() #Updates the current height variable to be the same as the actual height
                     for r in button_list:
                         r.resize(current_settings.window_width, current_settings.window_height,scaled_font(current_settings.window_height)) #Update all buttons to be proportional to the new resolution.
+                    
+                    for r in display_box_list:
+                        r.resize(current_settings.window_width, current_settings.window_height,scaled_font(current_settings.window_height)) #Update all display boxes to be proportional to the new resolution.
+                        
+                    logo = pygame.transform.scale(logo, (current_settings.window_width*0.5, current_settings.window_height*0.433))
                     pygame.display.set_caption("BLOCKADE (main menu)") #Makes sure the caption returns to Blockade (main menu)
 
                 elif b == win_stats_button:
@@ -84,6 +99,11 @@ def main_menu(current_settings): #The parameters: cw = Current width, ch = Curre
                     window = pygame.display.set_mode((current_settings.window_width, current_settings.window_height)) 
                     for r in button_list:
                         r.resize(current_settings.window_width, current_settings.window_height,scaled_font(current_settings.window_height)) #Update all buttons to be proportional to the new resolution.
+                    
+                    for r in display_box_list:
+                        r.resize(current_settings.window_width, current_settings.window_height,scaled_font(current_settings.window_height)) #Update all display boxes to be proportional to the new resolution.
+                    
+                    logo = pygame.transform.scale(logo, (current_settings.window_width*0.5, current_settings.window_height*0.433))
                     pygame.display.set_caption("BLOCKADE (main menu)")
 
                 elif b == settings_menu_button:
@@ -91,6 +111,11 @@ def main_menu(current_settings): #The parameters: cw = Current width, ch = Curre
                     window = pygame.display.set_mode((current_settings.window_width, current_settings.window_height))  
                     for r in button_list:
                         r.resize(current_settings.window_width, current_settings.window_height,scaled_font(current_settings.window_height)) #Update all buttons to be proportional to the new resolution.
+                    
+                    for r in display_box_list:
+                        r.resize(current_settings.window_width, current_settings.window_height,scaled_font(current_settings.window_height)) #Update all display boxes to be proportional to the new resolution.
+                    
+                    logo = pygame.transform.scale(logo, (current_settings.window_width*0.5, current_settings.window_height*0.433))
                     pygame.display.set_caption("BLOCKADE (main menu)")
 
                 elif b == advice_button:
@@ -101,10 +126,15 @@ def main_menu(current_settings): #The parameters: cw = Current width, ch = Curre
                     sys.exit() #Exit the software if this button is clicked.
 
         #drawing
-        window.fill((0,0,0)) #fill in the background
+        window.blit(background, (0, 0)) #fill in the background
+        
         for b in button_list:
             b.b_draw(window) #loop through all of the buttons and draw them onto the window.
+        
+        for b in display_box_list: #loop through all of the display boxes and draw them onto the window.
+            b.b_draw(window)
+        
 
-        logo_placeholder.b_draw(window) #placeholder for logo
+        window.blit(logo, (current_settings.window_width*0.45, current_settings.window_height*0.033)) #placeholder for logo
         
         pygame.display.update() #Updates the frames in the window.
