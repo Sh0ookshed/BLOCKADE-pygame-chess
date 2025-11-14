@@ -14,7 +14,9 @@ import sys    #Clean shutdown
 #------------------------------------------------------------------------------
 #File imports
 #------------------------------------------------------------------------------
-from utils.scalable_font import scaled_font #Font is proportional to window size.
+from utils.text_wrapper import text_wrap
+
+from utils.configs.scalable_font import scaled_font #Font is proportional to window size.
 
 from utils.UI.display_box import Display_box
 from utils.UI.button import Button
@@ -122,7 +124,7 @@ def settings(current_settings): #The parameters: cw = Current width, ch = Curren
                                 current_settings.audio_level +=5
 
                         audio_display_db.text = str(current_settings.audio_level)
-                        audio_display_db.text_surface = scaled_font(current_settings.window_height).render(audio_display_db.text,True,WHITE)
+                        audio_display_db.text_lines = text_wrap(audio_display_db.text, audio_display_db.font, audio_display_db.box_w*audio_display_db.window_width)
 
             elif resolution_choice.opened == True: #When resolution choice dropdown is open only the dropdown buttons can be pressed.
                 if b == resolution_choice:

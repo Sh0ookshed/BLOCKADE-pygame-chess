@@ -11,6 +11,11 @@
 import pygame #GUI
 
 #------------------------------------------------------------------------------
+#File imports
+#------------------------------------------------------------------------------
+from utils.text_wrapper import text_wrap
+
+#------------------------------------------------------------------------------
 #initialisation
 #------------------------------------------------------------------------------
 pygame.init()
@@ -35,18 +40,28 @@ class Display_box:
         self.font = font
         self.box_colour = box_colour
         self.text_colour = text_colour
+        self.text_lines = text_wrap(self.text, self.font, self.box_w*self.window_width)
 
-        #The text that will be on the button and the text rectangle that can blit onto the button rectangle
-        self.text_surface = self.font.render(self.text,True, self.text_colour)
-        self.text_surface_rect = self.text_surface.get_rect(center = self.box_rect.center)
-        
     #methods    
 
     def b_draw(self,window_surface): #Method to draw the display box onto the window.
         pygame.draw.rect(window_surface,self.box_colour,self.box_rect)
-        window_surface.blit(self.text_surface,self.text_surface_rect)
+        text_size_total = sum(self.font.size(line)[1] for line in self.text_lines)
+
+        line_position = (self.window_height*self.box_y) + (self.box_h*self.window_height - text_size_total) / 2
+
+        for line in self.text_lines:
+            text_surface = self.font.render(line,True,self.text_colour)
+
+            x_centre = (self.box_x*self.window_width) + ((self.box_w*self.window_width) / 2)
+
+            window_surface.blit(text_surface, ((x_centre - (text_surface.get_width() / 2)), line_position))
+            line_position += text_surface.get_height()
+
 
     def resize(self,width,height,font): #Method to resize the display box so that it is still proportional with the screen. 
         self.box_rect = pygame.Rect((width*self.box_x,height*self.box_y,width*self.box_w,height*self.box_h))
-        self.text_surface = font.render(self.text,True, self.text_colour)
-        self.text_surface_rect = self.text_surface.get_rect(center = self.box_rect.center)
+        self.text_lines = text_wrap(self.text, font, self.box_w*width)
+        self.font = font
+        self.window_width = width
+        self.window_height = height

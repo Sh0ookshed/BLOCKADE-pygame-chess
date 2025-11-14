@@ -16,7 +16,10 @@ from windows.gameplay_window import gameplay #Importing the windows.
 from windows.settings_window import settings
 from windows.win_statistics_window import win_stats
 
-from utils.scalable_font import scaled_font #Font is proportional to window size.
+from utils.text_wrapper import text_wrap
+
+from utils.configs.scalable_font import scaled_font #Font is proportional to window size.
+
 from utils.random_pick import rand_item
 
 from utils.UI.display_box import Display_box
@@ -120,7 +123,7 @@ def main_menu(current_settings): #The parameters: cw = Current width, ch = Curre
 
                 elif b == advice_button:
                     b.text = rand_item(advice_list)
-                    b.text_surface = scaled_font(current_settings.window_height).render(b.text,True,WHITE) #When the button is clicked a new random hint / tip is generated.
+                    b.text_lines = text_wrap(b.text, b.font, b.box_w*b.window_width) #When the button is clicked a new random hint / tip is generated.
 
                 elif b == exit_button:
                     sys.exit() #Exit the software if this button is clicked.

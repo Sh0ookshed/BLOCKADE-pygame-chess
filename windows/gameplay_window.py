@@ -14,7 +14,7 @@ import sys    #Clean shutdown
 #------------------------------------------------------------------------------
 #File imports
 #------------------------------------------------------------------------------
-from utils.scalable_font import scaled_font #Font is proportional to window size.
+from utils.configs.scalable_font import scaled_font #Font is proportional to window size.
 
 from utils.UI.display_box import Display_box
 from utils.UI.button import Button
@@ -31,7 +31,7 @@ pygame.init()
 #------------------------------------------------------------------------------
 #gameplay window function
 #------------------------------------------------------------------------------
-def gameplay(current_settings):  #The parameters: cw = Current width, ch = Current height (Referring to the size of the display).
+def gameplay(current_settings): 
 
     #important locals
     chess_board_surface = pygame.Surface((current_settings.window_width*0.665,current_settings.window_height*0.675))

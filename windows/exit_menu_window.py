@@ -14,7 +14,7 @@ import sys #Clean Shutdown
 #------------------------------------------------------------------------------
 #File imports
 #------------------------------------------------------------------------------
-from utils.scalable_font import scaled_font #Font is proportional to window size.
+from utils.configs.scalable_font import scaled_font #Font is proportional to window size.
 from utils.UI.display_box import Display_box
 from utils.UI.button import Button
 from resources.colours import *

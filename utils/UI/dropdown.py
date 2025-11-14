@@ -14,6 +14,8 @@ import sys #Clean shutdown
 #------------------------------------------------------------------------------
 #File imports
 #------------------------------------------------------------------------------
+from utils.text_wrapper import text_wrap
+
 from utils.UI.button import Button
 
 #------------------------------------------------------------------------------
@@ -32,8 +34,7 @@ class dropdown_button(Button):
         #variable attributes
         self.open_text = self.text+"<"
         self.close_text = self.text+">"
-        self.text_surface = self.font.render(self.close_text,True, self.text_colour)
-        self.text_surface_rect = self.text_surface.get_rect(center = self.box_rect.center)
+        self.text_lines = text_wrap(self.close_text, font, self.box_w*self.window_width)
 
         #set attributes
         self.opened = False
@@ -47,15 +48,13 @@ class dropdown_button(Button):
                 if self.hover == True and self.opened ==True:   #Closes the dropdown if it is open.
                     self.clicked = True
                     self.opened = False
-                    self.text_surface = self.font.render(self.close_text,True, self.text_colour)
-                    self.text_surface_rect = self.text_surface.get_rect(center = self.box_rect.center)
+                    self.text_lines = text_wrap(self.text, self.font, self.box_w*self.window_width)
                     return self.clicked, self.opened
 
                 elif self.hover == True: #Opens the dropdown if it is closed
                     self.clicked = True
                     self.opened = True
-                    self.text_surface = self.font.render(self.open_text,True, self.text_colour)
-                    self.text_surface_rect = self.text_surface.get_rect(center = self.box_rect.center)
+                    self.text_lines = text_wrap(self.open_text, self.font, self.box_w*self.window_width)
                     return self.clicked, self.opened
 
 
@@ -97,8 +96,7 @@ class dropdown_button(Button):
                 self.text = str(dropdown_list[n])
                 self.close_text = self.text+">"       #> Means the dropdown is closed and < means the dropdown is open
                 self.open_text = self.text+"<"
-                self.text_surface = self.font.render(self.close_text,True, self.text_colour)
-                self.text_surface_rect = self.text_surface.get_rect(center = self.box_rect.center)
+                self.text_lines = text_wrap(self.close_text, self.font, self.box_w*self.window_width)
                 self.opened = False
                 chosen_index = n
 

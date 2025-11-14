@@ -15,6 +15,8 @@ import pygame #GUI
 #------------------------------------------------------------------------------
 from utils.UI.display_box import Display_box #Button inherits from Display box
 
+from utils.text_wrapper import text_wrap
+
 #------------------------------------------------------------------------------
 #initialisation
 #------------------------------------------------------------------------------
@@ -52,5 +54,16 @@ class Button(Display_box):
         button_colour = self.box_colour
         if self.hover == True:
             button_colour = self.hover_colour
+
         pygame.draw.rect(window_surface,button_colour,self.box_rect)
-        window_surface.blit(self.text_surface,self.text_surface_rect)
+        text_size_total = sum(self.font.size(line)[1] for line in self.text_lines)
+
+        line_position = (self.window_height*self.box_y) + (self.box_h*self.window_height - text_size_total) / 2
+        
+        for line in self.text_lines:
+            text_surface = self.font.render(line,True,self.text_colour)
+            
+            x_centre = (self.box_x*self.window_width) + ((self.box_w*self.window_width) / 2)
+
+            window_surface.blit(text_surface, ((x_centre - (text_surface.get_width() / 2)), line_position))
+            line_position += text_surface.get_height()
