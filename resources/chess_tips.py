@@ -1,8 +1,14 @@
-#filed containing a list of chess tips for players to see mainly for a beginner friendly atmosphere
+#------------------------------------------------------------------------------
+#CHESS TIPS
+#------------------------------------------------------------------------------
 
-#this is just a big list of chess tips that can literally just be used to display in the main menu
+#File containing a list of chess tips for players to see mainly for a beginner friendly atmosphere.
+#This is just a big list of chess tips that can literally just be used to display in the main menu.
+#These tips will also be displayed in the win, draw, and lose windows as a nice touch at the end of a game.
 
-#these tips will also be displayed in the win, draw, and lose windows as a nice touch at the end of a game
+#------------------------------------------------------------------------------
+#Main tips / hints list
+#------------------------------------------------------------------------------
 
 advice_list = [
     "Control the center of the board with your pawns and pieces.",

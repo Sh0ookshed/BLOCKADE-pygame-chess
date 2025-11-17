@@ -1,16 +1,35 @@
 #------------------------------------------------------------------------------
-#RANDOM PICK
+#DROPDOWN VALUES
 #------------------------------------------------------------------------------
 
-#Simple function just randomly picks a hint from the hint / tip list for the main menu.
+#Contains all the lists for literally any dropdown menu that needs to be created
 
 #------------------------------------------------------------------------------
-#libraries
+#Main resolution list
 #------------------------------------------------------------------------------
-import random 
+
+#for the settings menu. Resolutions could change based on feedback.
+
+resolutions = [
+    (1366,768),
+    (1920,1080),
+    (1600,900),
+    (2560,1440),
+    (3840,2160),
+    (1440,960),
+    (1280,800),
+    (2560,1600)]
 
 #------------------------------------------------------------------------------
-#random pick function
+#Main chess times list
 #------------------------------------------------------------------------------
-def rand_item(pick_list):
-    return random.choice(pick_list) #Choose something random within the list given in the paremeter.
+
+#chess times in minutes
+
+chess_times = [
+    1,
+    2,
+    3,
+    5,
+    10
+]

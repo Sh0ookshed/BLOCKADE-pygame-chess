@@ -1,21 +1,37 @@
-#main game file where the program will start from and where the main game will be played from.
+#------------------------------------------------------------------------------
+#MAIN FILE
+#------------------------------------------------------------------------------
 
-#libraries
-import pygame
-import sys
+#This is where the program will start from, it immediately loads the user into the main menu function 
+#allowing the user to go to any part of the program.
 
-#file imports
+#------------------------------------------------------------------------------
+#Libraries
+#------------------------------------------------------------------------------
+import pygame #GUI
+import sys    #For shutting down the program.
+
+#------------------------------------------------------------------------------
+#File imports
+#------------------------------------------------------------------------------
+from utils.configs.current_state import c_state
+
 from windows.main_menu_window import main_menu
 
-#initialisation
-pygame.init()
+#------------------------------------------------------------------------------
+#Initialisation
+#------------------------------------------------------------------------------
+pygame.init() #Required for pygame to work in the file.
+resolution = pygame.display.Info() #This gets the current width and height of the users monitor / screen.
 
-#globals
-resolution = pygame.display.Info()
-current_w, current_h = resolution.current_w, resolution.current_h
+#------------------------------------------------------------------------------
+#Globals
+#------------------------------------------------------------------------------
+settings_configs = c_state(resolution.current_w, resolution.current_h)
 
-#main code
-main_menu() #always open to main menu first
+#------------------------------------------------------------------------------
+#Main code
+#------------------------------------------------------------------------------
+main_menu(settings_configs) #Always opens to main menu first. 
 
-pygame.quit()
-sys.exit()
+sys.exit() #This is just so that there is always a clean exit where everything gets shut down.

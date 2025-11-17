@@ -1,16 +1,20 @@
 #------------------------------------------------------------------------------
-#RANDOM PICK
+#SCALABLE FONT
 #------------------------------------------------------------------------------
 
-#Simple function just randomly picks a hint from the hint / tip list for the main menu.
+#Contains the function for the scalable font that changes size depending on window size.
 
 #------------------------------------------------------------------------------
 #libraries
 #------------------------------------------------------------------------------
-import random 
+import pygame #GUI
+
+#initialisation
+pygame.init() 
 
 #------------------------------------------------------------------------------
-#random pick function
+#Scalable font function
 #------------------------------------------------------------------------------
-def rand_item(pick_list):
-    return random.choice(pick_list) #Choose something random within the list given in the paremeter.
+def scaled_font(height):
+    font = pygame.font.Font(None,int(height*0.08))  #font size is 8% of the height of the window.
+    return font
