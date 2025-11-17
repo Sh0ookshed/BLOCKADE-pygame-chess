@@ -26,5 +26,5 @@ class c_state:
         self.window_width = window_width
         self.window_height = window_height
         self.audio_level = 50
-        self.feedback_on = True
+        self.feedback_on = True            #default values
         self.time_amount = 10

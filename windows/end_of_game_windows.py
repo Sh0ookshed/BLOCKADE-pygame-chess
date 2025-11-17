@@ -14,11 +14,11 @@ import sys #Clean shutdown
 #------------------------------------------------------------------------------
 #File imports
 #------------------------------------------------------------------------------
+from resources.colours import *
+
 from utils.configs.scalable_font import scaled_font #Font is proportional to window size.
 
 from utils.UI.button import Button
-
-from resources.colours import *
 
 #------------------------------------------------------------------------------
 #initialisation
@@ -52,10 +52,13 @@ def you_draw():
     
     #window loop
     active = True
+
     while active:
         event_handler = pygame.event.get() #The event handler checks through every single possible pygame event.
         mouse_position = pygame.mouse.get_pos() #Allows the tracking of the mouse position.
+
         for event in event_handler:
+
             if event.type == pygame.QUIT:    #If you click on the X in the top right it will exit the software.
                 sys.exit()
 
@@ -69,9 +72,12 @@ def you_lose():
     
     #window loop
     active = True
+
     while active:
         event_handler = pygame.event.get() #The event handler checks through every single possible pygame event.
         mouse_position = pygame.mouse.get_pos() #Allows the tracking of the mouse position.
+
         for event in event_handler:
+            
             if event.type == pygame.QUIT:    #If you click on the X in the top right it will exit the software.
                 sys.exit()

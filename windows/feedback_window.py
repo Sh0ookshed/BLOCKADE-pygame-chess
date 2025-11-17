@@ -13,9 +13,12 @@ import sys    #Clean shutdown
 #------------------------------------------------------------------------------
 #File imports
 #------------------------------------------------------------------------------
-from utils.configs.scalable_font import scaled_font #Font is proportional to window size.
-from utils.UI.button import Button
 from resources.colours import *
+
+from utils.configs.scalable_font import scaled_font #Font is proportional to window size.
+
+from utils.UI.button import Button
+
 
 #------------------------------------------------------------------------------
 #initialisation
@@ -32,9 +35,12 @@ def feedback():
     
     #window loop
     active = True
+
     while active:
         event_handler = pygame.event.get() #The event handler checks through every single possible pygame event.
         mouse_position = pygame.mouse.get_pos() #Allows the tracking of the mouse position.
+
         for event in event_handler:
+            
             if event.type == pygame.QUIT:    #also need to work out how to down the whole program from exit
                 sys.exit()

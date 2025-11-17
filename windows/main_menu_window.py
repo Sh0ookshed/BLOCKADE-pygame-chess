@@ -12,21 +12,20 @@ import sys    #Clean shutdown
 #------------------------------------------------------------------------------
 #File imports
 #------------------------------------------------------------------------------
-from windows.gameplay_window import gameplay #Importing the windows.
-from windows.settings_window import settings
-from windows.win_statistics_window import win_stats
+from resources.colours import *
+from resources.chess_tips import advice_list #This list just contains loads of tips/hints for the random generator.
 
 from utils.text_wrapper import text_wrap
+from utils.random_pick import rand_item
 
 from utils.configs.scalable_font import scaled_font #Font is proportional to window size.
 
-from utils.random_pick import rand_item
-
 from utils.UI.display_box import Display_box
-from utils.UI.button import Button                
+from utils.UI.button import Button 
 
-from resources.colours import *
-from resources.chess_tips import advice_list #This list just contains loads of tips/hints for the random generator.
+from windows.gameplay_window import gameplay #Importing the windows.
+from windows.settings_window import settings
+from windows.win_statistics_window import win_stats
 
 #------------------------------------------------------------------------------
 #initialisation
@@ -36,7 +35,7 @@ pygame.init()
 #------------------------------------------------------------------------------
 #main menu window function
 #------------------------------------------------------------------------------
-def main_menu(current_settings): #The parameters: cw = Current width, ch = Current height (Referring to the size of the display).
+def main_menu(current_settings): #import current game state
     
     #display configs
     window = pygame.display.set_mode((current_settings.window_width, current_settings.window_height)) #Sets the size of the window to be the current width and height.
@@ -70,24 +69,26 @@ def main_menu(current_settings): #The parameters: cw = Current width, ch = Curre
 
     #window loop #While the variable "active" is true the win statistics function won't end unless forcefully exited.
     active = True
+
     while active:
         event_handler = pygame.event.get() #The event handler checks through every single possible pygame event.
         mouse_position = pygame.mouse.get_pos() #Allows the tracking of the mouse position.
 
         for event in event_handler:
+
             if event.type == pygame.QUIT:    #If you click on the X in the top right it will exit the software.
                 sys.exit()
         
         for b in button_list:   #Loop through every button to give each one a unique function.
             b.detect_mouse(mouse_position)
             b.check_for_click(event_handler) #Check for where the mouse is and if it has clicked the button.
+
             if b.clicked == True:
 
                 if b == play_button:
                     current_settings = gameplay(current_settings)
                     window = pygame.display.set_mode((current_settings.window_width, current_settings.window_height)) #Updates the resolution in main menu after returning from the relevant window so the windows are the same size.
-                    cw = pygame.display.get_surface().get_width() #Updates the current width variable to be the same as the actual width
-                    ch = pygame.display.get_surface().get_height() #Updates the current height variable to be the same as the actual height
+                    
                     for r in button_list:
                         r.resize(current_settings.window_width, current_settings.window_height,scaled_font(current_settings.window_height)) #Update all buttons to be proportional to the new resolution.
                     
@@ -98,8 +99,10 @@ def main_menu(current_settings): #The parameters: cw = Current width, ch = Curre
                     pygame.display.set_caption("BLOCKADE (main menu)") #Makes sure the caption returns to Blockade (main menu)
 
                 elif b == win_stats_button:
+
                     current_settings = win_stats(current_settings)
                     window = pygame.display.set_mode((current_settings.window_width, current_settings.window_height)) 
+
                     for r in button_list:
                         r.resize(current_settings.window_width, current_settings.window_height,scaled_font(current_settings.window_height)) #Update all buttons to be proportional to the new resolution.
                     
@@ -110,8 +113,10 @@ def main_menu(current_settings): #The parameters: cw = Current width, ch = Curre
                     pygame.display.set_caption("BLOCKADE (main menu)")
 
                 elif b == settings_menu_button:
+
                     current_settings = settings(current_settings)
                     window = pygame.display.set_mode((current_settings.window_width, current_settings.window_height))  
+                    
                     for r in button_list:
                         r.resize(current_settings.window_width, current_settings.window_height,scaled_font(current_settings.window_height)) #Update all buttons to be proportional to the new resolution.
                     
@@ -138,6 +143,6 @@ def main_menu(current_settings): #The parameters: cw = Current width, ch = Curre
             b.b_draw(window)
         
 
-        window.blit(logo, (current_settings.window_width*0.45, current_settings.window_height*0.033)) #placeholder for logo
+        window.blit(logo, (current_settings.window_width*0.45, current_settings.window_height*0.033)) #blit the logo
         
         pygame.display.update() #Updates the frames in the window.

@@ -14,6 +14,9 @@ import sys    #Clean shutdown
 #------------------------------------------------------------------------------
 #File imports
 #------------------------------------------------------------------------------
+from resources.colours import *
+from resources.dropdown_values import * #Required for any dropdown boxes as this contains the list for the dropdown boxes.
+
 from utils.text_wrapper import text_wrap
 
 from utils.configs.scalable_font import scaled_font #Font is proportional to window size.
@@ -21,9 +24,6 @@ from utils.configs.scalable_font import scaled_font #Font is proportional to win
 from utils.UI.display_box import Display_box
 from utils.UI.button import Button
 from utils.UI.dropdown import dropdown_button
-
-from resources.colours import *
-from resources.dropdown_values import * #Required for any dropdown boxes as this contains the list for the dropdown boxes.
 
 #------------------------------------------------------------------------------
 #initialisation
@@ -33,7 +33,7 @@ pygame.init()
 #------------------------------------------------------------------------------
 #settings menu window function
 #------------------------------------------------------------------------------
-def settings(current_settings): #The parameters: cw = Current width, ch = Current height (Referring to the size of the display).
+def settings(current_settings): #import current game state
 
     #display configs
     window = pygame.display.set_mode((current_settings.window_width, current_settings.window_height)) 
@@ -82,23 +82,31 @@ def settings(current_settings): #The parameters: cw = Current width, ch = Curren
 
     #window loop #While the variable "active" is true the win statistics function won't end unless forcefully exited.
     active = True
+
     while active:
         current_res = current_settings.window_width, current_settings.window_height #Captures the current resolution of the window.
         event_handler = pygame.event.get() #The event handler checks through every single possible pygame event.
         mouse_position = pygame.mouse.get_pos() #Allows the tracking of the mouse position.
+
         for event in event_handler:
+
             if event.type == pygame.QUIT:    #If you click on the X in the top right it will exit the software.
                 sys.exit()
 
         for b in button_list: #Loop through every button to give each one a unique function
+
             if resolution_choice.opened == False and time_choice.opened == False: #This is so that when the dropdown buttons are open the only buttons that can be pressed are the dropdown ones.
                 b.detect_mouse(mouse_position)
                 b.check_for_click(event_handler)  #Check for where the mouse is and if it has clicked the button.
+
                 if b.clicked == True:
+
                     if b == return_button:
+                        pygame.event.get()
                         return (current_settings) #Return to main menu storing current resolution.
                     
-                    if b in volume_list:  #Checks to see if volume has been altered.
+                    elif b in volume_list:  #Checks to see if volume has been altered.
+
                         if b == volume_down_button:
 
                             if current_settings.audio_level > 0:
@@ -113,10 +121,12 @@ def settings(current_settings): #The parameters: cw = Current width, ch = Curren
                                 current_settings.audio_level -=5 #-5 if audio is above zero.
 
                         elif b == volume_up_button:
+
                             if current_settings.audio_level < 100:
                                 current_settings.audio_level +=1 #+1 if audio is less than 100.
 
                         elif b == volume_up_extra_button:
+
                             if current_settings.audio_level >= 95:
                                 current_settings.audio_level = 100
 
@@ -127,10 +137,13 @@ def settings(current_settings): #The parameters: cw = Current width, ch = Curren
                         audio_display_db.text_lines = text_wrap(audio_display_db.text, audio_display_db.font, audio_display_db.box_w*audio_display_db.window_width)
 
             elif resolution_choice.opened == True: #When resolution choice dropdown is open only the dropdown buttons can be pressed.
+
                 if b == resolution_choice:
                     b.detect_mouse(mouse_position)
                     b.check_for_click(event_handler)
+
             else:
+
                 if b == time_choice:   #When time choice dropdown is open only the dropdown buttons can be pressed.
                     b.detect_mouse(mouse_position)
                     b.check_for_click(event_handler)
@@ -147,16 +160,21 @@ def settings(current_settings): #The parameters: cw = Current width, ch = Curren
         
         if resolution_choice.opened == True:
             chosen_res = resolutions[resolution_choice.drop(resolutions,window,mouse_position,event_handler)] #If the dropdown gets clicked, open the dropdown and when an option is clicked return the index for it.
+           
             if chosen_res != current_res:
                 current_settings.window_width = chosen_res[0]
                 current_settings.window_height = chosen_res[1]
 
                 pygame.display.set_mode((current_settings.window_width, current_settings.window_height)) #change the resolution to be the same as the one selected.
 
+                #making all of the buttons, display boxes and assets update to be the correct size
                 for r in button_list:
                     r.resize(current_settings.window_width, current_settings.window_height,scaled_font(current_settings.window_height))
+
                 for r in display_box_list:
                     r.resize(current_settings.window_width, current_settings.window_height,scaled_font(current_settings.window_height))
+                                                                                                                                       
+                background = pygame.transform.scale(background, (current_settings.window_width, current_settings.window_height))
 
         elif time_choice.opened == True:
             current_settings.time_amount = chess_times[time_choice.drop(chess_times,window,mouse_position,event_handler)]

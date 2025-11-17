@@ -18,11 +18,9 @@ pygame.init()
 #Image box class
 #------------------------------------------------------------------------------
 class Chess_square:
-    
     #attributes
     def __init__(self,image,window_width,window_height,box_x,box_y,box_w,box_h,box_colour):
         
-
         #variable attributes
         self.window_width = window_width
         self.window_height = window_height
@@ -40,6 +38,7 @@ class Chess_square:
         if image == "none":
             self.empty = True
             self.image = image
+            
         else:
             self.image == pygame.image.load(self.image).convert_alpha()
             self.image == pygame.transform.scale(image,self.box_rect.width,self.box_rect.height)
@@ -48,7 +47,8 @@ class Chess_square:
         
     def draw_box(self,window_surface):
         if self.empty == True:
-            pygame.draw.rect(window_surface,self.box_colour,self.box_rect)
+            pygame.draw.rect(window_surface,self.box_colour,self.box_rect)   #if there isnt an image(chess piece in it) draw as normal else draw with the image
+      
         else:
             pygame.draw.rect(window_surface,self.box_colour,self.box_rect)
             window_surface.blit(self.image,self.box_rect)

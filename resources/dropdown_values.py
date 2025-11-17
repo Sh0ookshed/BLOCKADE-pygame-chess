@@ -8,6 +8,8 @@
 #Main resolution list
 #------------------------------------------------------------------------------
 
+#for the settings menu. Resolutions could change based on feedback.
+
 resolutions = [
     (1366,768),
     (1920,1080),
@@ -21,6 +23,8 @@ resolutions = [
 #------------------------------------------------------------------------------
 #Main chess times list
 #------------------------------------------------------------------------------
+
+#chess times in minutes
 
 chess_times = [
     1,

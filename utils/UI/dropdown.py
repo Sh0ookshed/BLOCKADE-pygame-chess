@@ -48,7 +48,7 @@ class dropdown_button(Button):
                 if self.hover == True and self.opened ==True:   #Closes the dropdown if it is open.
                     self.clicked = True
                     self.opened = False
-                    self.text_lines = text_wrap(self.text, self.font, self.box_w*self.window_width)
+                    self.text_lines = text_wrap(self.close_text, self.font, self.box_w*self.window_width)
                     return self.clicked, self.opened
 
                 elif self.hover == True: #Opens the dropdown if it is closed
@@ -101,3 +101,11 @@ class dropdown_button(Button):
                 chosen_index = n
 
         return chosen_index #Returns the index of the chosen dropdown option. This means that the value in the original list that links to the chosen index can be chosen and therefore be used for a functionality such as choosing an new chess clock time or resolution.
+
+
+    def resize(self,width,height,font): #Method to resize the display box so that it is still proportional with the screen (needs to be redone for dropdown because of open and close text). 
+        self.box_rect = pygame.Rect((width*self.box_x,height*self.box_y,width*self.box_w,height*self.box_h))
+        self.text_lines = text_wrap(self.close_text, font, self.box_w*width)
+        self.font = font
+        self.window_width = width
+        self.window_height = height

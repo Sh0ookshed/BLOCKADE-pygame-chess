@@ -15,8 +15,6 @@ import pygame #GUI
 #------------------------------------------------------------------------------
 from utils.UI.display_box import Display_box #Button inherits from Display box
 
-from utils.text_wrapper import text_wrap
-
 #------------------------------------------------------------------------------
 #initialisation
 #------------------------------------------------------------------------------

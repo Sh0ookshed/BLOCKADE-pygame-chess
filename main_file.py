@@ -15,6 +15,7 @@ import sys    #For shutting down the program.
 #File imports
 #------------------------------------------------------------------------------
 from utils.configs.current_state import c_state
+
 from windows.main_menu_window import main_menu
 
 #------------------------------------------------------------------------------
@@ -27,9 +28,6 @@ resolution = pygame.display.Info() #This gets the current width and height of th
 #Globals
 #------------------------------------------------------------------------------
 settings_configs = c_state(resolution.current_w, resolution.current_h)
-#current_w, current_h = resolution.current_w, resolution.current_h #Storing the width and height in the currentw/h variables.
-
-#current_w, current_h = 1280,800 #will delete at some point is just for debugging
 
 #------------------------------------------------------------------------------
 #Main code
