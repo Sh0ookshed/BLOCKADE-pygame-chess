@@ -23,9 +23,8 @@ from _chess_piece import chess_piece
 #rook class
 #------------------------------------------------------------------------------
 class rook_p(chess_piece):
-    def __init__(self, colour, p_ID, square):
-        super().__init__(colour, p_ID, square)
+    def __init__(self, p_ID, square, colour, image):
+        super().__init__(p_ID, square, colour, image)
 
         #attributes
-        self.image = pygame.image.load("assets/general pictures/placeholder.png").convert() #change image to rook image once created
         self.p_value = 5 #how many points the rook is worth
