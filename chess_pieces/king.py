@@ -29,3 +29,6 @@ class king_p(chess_piece):
         #attributes
         self.image = pygame.image.load("assets/general pictures/placeholder.png").convert() #change image to king image once created
         self.p_value = 10000 #how many points the king is worth. technically invaluable so a very big number is needed to value it
+
+        #boolean states
+        in_check = False #if the king is in check this is set to true
