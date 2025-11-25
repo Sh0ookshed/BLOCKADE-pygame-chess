@@ -6,10 +6,12 @@ This is a chess program that contains both back and front end allowing the user 
 
 # features:
 * Interactive main menu.
-* Customisable settings through settings menu.
-* Win statistics window to look at how many time you win,draw,lose.
+* Customisable settings through settings menu including: feedback on/off, how long each game lasts, and more.
+* Win statistics window to look at how many time you win,draw,lose. (which saves)
 * Feedback on moves you make against the algorithm.
 * Fully functional chess algorithm you can play against through a seperate game window.
+* Amazing image assets that I drew myself using Aseprite which is a 2D pixel art creation software
 
 # If you think the project is cool 
 I will include all of my documentation and planning for this project inside of the repository for anyone to access to see my thought process and how i designed certain parts of the code.
+This project is a big learning experience for me as alongside creating it I am also learning how to use GIT /GitHub so forgive any poor early commits they hopefully get better.
