@@ -29,7 +29,7 @@ class chess_piece:
         self.width, self.height = square.size #gets the size of the chess square so the piece can scale to fit it
         self.colour = colour
         self.image = image
-        self.p_ID = p_ID #p_ID is the piece ID. its used to identify different pieces for the algorithm to understand.
+        self.p_ID = p_ID #p_ID is the piece ID. its used to identify different pieces for the algorithm to understand. IS A TUPLE
 
         #list attributes for the chess piece
         self.position = [] #coordinates for the chess piece
