@@ -1,6 +1,8 @@
 # BLOCKADE
 rust chess software with a pygame GUI. Officially named Blockade
 
+<img src="assets/BLOCKADE LOGO.png" width="400" height="300" />
+
 # what is this software?
 This is a chess program that contains both back and front end allowing the user to play against a chess bot. I'm trying to make this in a unique way that allows for a python GUI using pygame and then a rust backend. These two will then be linked together using the PY03 module to turn the rust backend into python modules to allow for chess to be played in a pygame program that runs off of rust logic to improve speed and accuracy. It will have a variety of features and is designed to be used casually and will not link to any databases or external websites as it is an offline experience. 
 
