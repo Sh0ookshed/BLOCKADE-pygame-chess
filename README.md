@@ -21,3 +21,15 @@ This is a chess program that contains both back and front end allowing the user 
 I will include all of my documentation and planning for this project inside of the repository for anyone to access to see my thought process and how i designed certain parts of the code.
 
 This project is a big learning experience for me as alongside creating it I am also learning how to use GIT /GitHub so forgive any poor early commits they hopefully get better.
+
+# Screenshots of the current program
+**The main menu where you can access all other parts of the program:**
+<img width="800" height="800" alt="Screenshot 2026-01-29 112817" src="https://github.com/user-attachments/assets/d0f7d729-a5a8-412b-b6e4-22f51011f57e" /> <br>
+
+
+**The win statistics window which will link to a txt file to save match results:**
+<img width="800" height="800" alt="Screenshot 2026-01-29 112852" src="https://github.com/user-attachments/assets/d898e024-bcd2-4bd8-a465-0cf7c3b59378" /> <br>
+
+
+**The settings menu where you can customise your experience:**
+<img width="800" height="800" alt="Screenshot 2026-01-29 112943" src="https://github.com/user-attachments/assets/70325c28-5db7-4f8e-8375-2db5d76cf4fa" /> <br>
