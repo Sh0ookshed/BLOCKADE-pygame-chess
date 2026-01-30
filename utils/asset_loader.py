@@ -15,11 +15,13 @@ import pygame #GUI
 pygame.init()
 
 #------------------------------------------------------------------------------
-#addet loader function
+#asset loader function
 #------------------------------------------------------------------------------
-def Asset_loader():
-    #misc assets
-    placeholder_image = pygame.image.load("assets/general pictures/placeholder.png").convert()
+class asset_load:
+    
+    def __init__(self):
+        #misc assets
+        self.placeholder_image = pygame.image.load("assets/general pictures/placeholder.png").convert()
 
-    #chess piece assets
-    #go here
+        #chess assets
+        #CHESS ASSETS GO HERE <----
