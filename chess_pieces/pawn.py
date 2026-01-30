@@ -28,3 +28,7 @@ class pawn_p(chess_piece):
 
         #attributes
         self.p_value = 1 #how many points the pawn is worth
+
+        #boolean state attributes
+        self.promoted = False #for if the pawn gets promoted by reaching the end
+        self.moved = False #so the pawn can move 2 squares on the first turn

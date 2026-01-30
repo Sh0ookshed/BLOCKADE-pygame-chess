@@ -29,5 +29,6 @@ class king_p(chess_piece):
         #attributes
         self.p_value = 10000 #how many points the king is worth. technically invaluable so a very big number is needed to value it
 
-        #boolean states
-        in_check = False #if the king is in check this is set to true
+        #boolean state attributes
+        self.in_check = False #if the king is in check this is set to true
+        self.has_moved = False #this is for castling

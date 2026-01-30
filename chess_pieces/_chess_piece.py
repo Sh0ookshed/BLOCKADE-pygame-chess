@@ -40,6 +40,6 @@ class chess_piece:
         self.defended_by = [] #list of pieces the piece is being defended by
         self.attacked_by = [] #list of pieces the piece is being attacked by
         
-        #boolean states
-        captured = False
-        pinned = False
+        #boolean state attributes
+        self.captured = False
+        self.pinned = False
