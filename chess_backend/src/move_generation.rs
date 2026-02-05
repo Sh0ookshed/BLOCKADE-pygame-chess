@@ -1,24 +1,20 @@
 //------------------------------------------------------------------------------
-//main lib file for the rust chess backend
+//MOVE GENERATION
 //------------------------------------------------------------------------------
+
+//this is the file where all potential legal moves for the player and the algorithm
+//are generated.
 
 //------------------------------------------------------------------------------
 //libraries
 //------------------------------------------------------------------------------
 use pyo3::prelude::*;
+use pyo3::types::PyList;
 
 //------------------------------------------------------------------------------
-//submodules
-//------------------------------------------------------------------------------
-pub mod board_evaluation;
-pub mod move_generation;
-pub mod move_search;
-pub mod move_validation;
-
-//------------------------------------------------------------------------------
-//functions
+//move generation function
 //------------------------------------------------------------------------------
 #[pymodule]
-fn chess_backend(_py: Python, _m: &PyModule) -> PyResult<()> {
-    Ok(())
+pub fn find_legal_moves(chess_board: @PyList){
+    //just paramters for now
 }

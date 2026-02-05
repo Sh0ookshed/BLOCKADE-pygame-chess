@@ -1,24 +1,21 @@
 //------------------------------------------------------------------------------
-//main lib file for the rust chess backend
+//BOARD EVALUATION
 //------------------------------------------------------------------------------
+
+//This is where the algorithm evaluates the board to calculate its score weighted
+//towards one side (either white or black). basically shows the position of the game
+//by giving the board a score.
 
 //------------------------------------------------------------------------------
 //libraries
 //------------------------------------------------------------------------------
 use pyo3::prelude::*;
+use pyo3::types::PyList;
 
 //------------------------------------------------------------------------------
-//submodules
-//------------------------------------------------------------------------------
-pub mod board_evaluation;
-pub mod move_generation;
-pub mod move_search;
-pub mod move_validation;
-
-//------------------------------------------------------------------------------
-//functions
+//board evaluation function
 //------------------------------------------------------------------------------
 #[pymodule]
-fn chess_backend(_py: Python, _m: &PyModule) -> PyResult<()> {
-    Ok(())
+pub fn evaluate_board(chess_board: &Pylist) -> Pyresult<i32> {
+    score = 0 //placeholder value for now
 }

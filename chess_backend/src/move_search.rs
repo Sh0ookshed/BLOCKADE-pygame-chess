@@ -1,24 +1,24 @@
 //------------------------------------------------------------------------------
-//main lib file for the rust chess backend
+//MOVE SEARCH
 //------------------------------------------------------------------------------
 
+//move search is the file where the opponent algorithm searches for the best move
+//to make out of all legal moves.
+
+use crate::board_evaluation;
+use crate::move_generation;
+use crate::move_validation;
+
 //------------------------------------------------------------------------------
-//libraries
+//libaries
 //------------------------------------------------------------------------------
 use pyo3::prelude::*;
+use pyo3::types::PyList;
 
 //------------------------------------------------------------------------------
-//submodules
-//------------------------------------------------------------------------------
-pub mod board_evaluation;
-pub mod move_generation;
-pub mod move_search;
-pub mod move_validation;
-
-//------------------------------------------------------------------------------
-//functions
+//move searching algorithm
 //------------------------------------------------------------------------------
 #[pymodule]
-fn chess_backend(_py: Python, _m: &PyModule) -> PyResult<()> {
-    Ok(())
+pub fn find_best_move(chess_board: &Pylist) {
+    //just parameters for now
 }
