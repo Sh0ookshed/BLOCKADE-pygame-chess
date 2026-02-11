@@ -33,15 +33,15 @@ pygame.init()
 #------------------------------------------------------------------------------
 #settings menu window function
 #------------------------------------------------------------------------------
-def settings(current_settings): #import current game state
+def settings(current_settings,load_assets): #import current game state
 
     #display configs
-    window = pygame.display.set_mode((current_settings.window_width, current_settings.window_height)) 
+    pygame.display.set_mode((current_settings.window_width, current_settings.window_height)) 
+    window = pygame.display.get_surface()
     pygame.display.set_caption("BLOCKADE (settings)") #Allows user to see game name and be clear what window they are in.
     
-    #loading assets
-    background = pygame.image.load("assets/BLOCKADE BACKGROUND.png").convert()
-    background = pygame.transform.scale(background, (current_settings.window_width, current_settings.window_height))
+    #sizing assets for resolution
+    load_assets.blockade_background_image = pygame.transform.scale(load_assets.blockade_background_image, (current_settings.window_width, current_settings.window_height))
     
     #creating display boxes
     resolution_db = Display_box("RESOLUTION:",current_settings.window_width, current_settings.window_height, 0.025, 0.033, 0.4, 0.15,scaled_font(current_settings.window_height),DARKBLUE,WHITE) #Display box that points towards resolution button.
@@ -150,7 +150,7 @@ def settings(current_settings): #import current game state
 
 
         #drawing
-        window.blit(background, (0,0)) #fill in the background
+        window.blit(load_assets.blockade_background_image, (0,0)) #fill in the background
 
         for b in button_list: #loop through all of the buttons and draw them onto the window.
             b.b_draw(window)
@@ -174,9 +174,9 @@ def settings(current_settings): #import current game state
                 for r in display_box_list:
                     r.resize(current_settings.window_width, current_settings.window_height,scaled_font(current_settings.window_height))
                                                                                                                                        
-                background = pygame.transform.scale(background, (current_settings.window_width, current_settings.window_height))
+                load_assets.blockade_background_image = pygame.transform.scale(load_assets.blockade_background_image, (current_settings.window_width, current_settings.window_height))
 
         elif time_choice.opened == True:
-            current_settings.time_amount = chess_times[time_choice.drop(chess_times,window,mouse_position,event_handler)]
+            current_settings.time_amount = chess_times[time_choice.drop(chess_times,window,mouse_position,event_handler)] #makes the time limit for the chess game whatever the user selects in the dropdown
 
         pygame.display.update() #Updates the frames in the window.

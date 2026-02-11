@@ -33,19 +33,19 @@ pygame.init()
 #------------------------------------------------------------------------------
 #gameplay window function
 #------------------------------------------------------------------------------
-def gameplay(current_settings): #import current game state
+def gameplay(current_settings,load_assets): #import current game state
 
     #important locals
     chess_board_surface = pygame.Surface((current_settings.window_width*0.665,current_settings.window_height*0.675))
     chess_board = create_chess_board(chess_board_surface.get_width(),chess_board_surface.get_height(),CREAM,GREY)
 
     #display configs
-    window = pygame.display.set_mode((current_settings.window_width, current_settings.window_height)) ##Sets the size of the window to be the current width and height.
+    pygame.display.set_mode((current_settings.window_width, current_settings.window_height)) #Sets the size of the window to be the current width and height.
+    window = pygame.display.get_surface()
     pygame.display.set_caption("BLOCKADE (gameplay)") #Allows user to see game name and be clear what window they are in.
     
-    #loading assets
-    background = pygame.image.load("assets/BLOCKADE BACKGROUND.png").convert()
-    background = pygame.transform.scale(background, (current_settings.window_width, current_settings.window_height))
+    #sizing assets for resolution
+    load_assets.blockade_background_image = pygame.transform.scale(load_assets.blockade_background_image, (current_settings.window_width, current_settings.window_height))
         
     #creating display boxes
     feedback_display_placeholder = Display_box("feedback placeholder",current_settings.window_width, current_settings.window_height, 0.675, 0.3, 0.3, 0.475,scaled_font(current_settings.window_height),DARKBLUE,WHITE)
@@ -88,7 +88,7 @@ def gameplay(current_settings): #import current game state
                     return (current_settings)
             
         #drawing
-        window.blit(background, (0,0)) #fill in the background
+        window.blit(load_assets.blockade_background_image, (0,0)) #fill in the background
 
         for b in button_list: #loop through all of the buttons and draw them onto the window.
             b.b_draw(window)

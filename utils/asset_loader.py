@@ -22,6 +22,8 @@ class asset_load:
     def __init__(self):
         #misc assets
         self.placeholder_image = pygame.image.load("assets/general pictures/placeholder.png").convert()
+        self.blockade_background_image = pygame.image.load("assets/BLOCKADE BACKGROUND.png")
+        self.blockade_logo_image = pygame.image.load("assets/BLOCKADE LOGO.png")
         
         #black chess piece assets
         self.black_bishop_image = pygame.image.load("assets/chess_piece_pictures/black bishop.png").convert()

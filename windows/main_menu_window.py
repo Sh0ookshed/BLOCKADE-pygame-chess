@@ -35,18 +35,17 @@ pygame.init()
 #------------------------------------------------------------------------------
 #main menu window function
 #------------------------------------------------------------------------------
-def main_menu(current_settings): #import current game state
+def main_menu(current_settings,load_assets): #import current game state
     
     #display configs
-    window = pygame.display.set_mode((current_settings.window_width, current_settings.window_height)) #Sets the size of the window to be the current width and height.
+    pygame.display.set_mode((current_settings.window_width, current_settings.window_height)) #Sets the size of the window to be the current width and height.
+    window = pygame.display.get_surface()
     pygame.display.set_caption("BLOCKADE (main menu)") #Allows user to see game name and be clear what window they are in.
     
-    #loading assets
-    background = pygame.image.load("assets/BLOCKADE BACKGROUND.png").convert()
-    background = pygame.transform.scale(background, (current_settings.window_width, current_settings.window_height))
+    #sizing assets for resolution
+    load_assets.blockade_background_image = pygame.transform.scale(load_assets.blockade_background_image, (current_settings.window_width, current_settings.window_height))
     
-    logo = pygame.image.load("assets/BLOCKADE LOGO.png").convert()
-    logo = pygame.transform.scale(logo, (current_settings.window_width*0.5, current_settings.window_height*0.433))
+    load_assets.blockade_logo_image = pygame.transform.scale(load_assets.blockade_logo_image, (current_settings.window_width*0.5, current_settings.window_height*0.433))
     
     #creating display boxes
     advice_db = Display_box("Useful hints and tricks:", current_settings.window_width, current_settings.window_height, 0.45, 0.499 ,0.5, 0.1,scaled_font(current_settings.window_height),DARKBLUE,WHITE)
@@ -86,8 +85,9 @@ def main_menu(current_settings): #import current game state
             if b.clicked == True:
 
                 if b == play_button:
-                    current_settings = gameplay(current_settings)
-                    window = pygame.display.set_mode((current_settings.window_width, current_settings.window_height)) #Updates the resolution in main menu after returning from the relevant window so the windows are the same size.
+                    current_settings = gameplay(current_settings,load_assets)
+                    pygame.display.set_mode((current_settings.window_width, current_settings.window_height)) #Updates the resolution in main menu after returning from the relevant window so the windows are the same size.
+                    window = pygame.display.get_surface()
                     
                     for r in button_list:
                         r.resize(current_settings.window_width, current_settings.window_height,scaled_font(current_settings.window_height)) #Update all buttons to be proportional to the new resolution.
@@ -95,27 +95,31 @@ def main_menu(current_settings): #import current game state
                     for r in display_box_list:
                         r.resize(current_settings.window_width, current_settings.window_height,scaled_font(current_settings.window_height)) #Update all display boxes to be proportional to the new resolution.
                         
-                    logo = pygame.transform.scale(logo, (current_settings.window_width*0.5, current_settings.window_height*0.433))
+                    load_assets.blockade_logo_image = pygame.transform.scale(load_assets.blockade_logo_image, (current_settings.window_width*0.5, current_settings.window_height*0.433))
+                    load_assets.blockade_background_image = pygame.transform.scale(load_assets.blockade_background_image,(current_settings.window_width, current_settings.window_height))
+                    
                     pygame.display.set_caption("BLOCKADE (main menu)") #Makes sure the caption returns to Blockade (main menu)
 
                 elif b == win_stats_button:
-
-                    current_settings = win_stats(current_settings)
-                    window = pygame.display.set_mode((current_settings.window_width, current_settings.window_height)) 
-
+                    current_settings = win_stats(current_settings,load_assets)
+                    pygame.display.set_mode((current_settings.window_width, current_settings.window_height)) 
+                    window = pygame.display.get_surface()
+                    
                     for r in button_list:
                         r.resize(current_settings.window_width, current_settings.window_height,scaled_font(current_settings.window_height)) #Update all buttons to be proportional to the new resolution.
                     
                     for r in display_box_list:
                         r.resize(current_settings.window_width, current_settings.window_height,scaled_font(current_settings.window_height)) #Update all display boxes to be proportional to the new resolution.
                     
-                    logo = pygame.transform.scale(logo, (current_settings.window_width*0.5, current_settings.window_height*0.433))
-                    pygame.display.set_caption("BLOCKADE (main menu)")
+                    load_assets.blockade_logo_image = pygame.transform.scale(load_assets.blockade_logo_image, (current_settings.window_width*0.5, current_settings.window_height*0.433))
+                    load_assets.blockade_background_image = pygame.transform.scale(load_assets.blockade_background_image,(current_settings.window_width, current_settings.window_height))
+                    
+                    pygame.display.set_caption("BLOCKADE (main menu)") #Makes sure the caption returns to Blockade (main menu)
 
                 elif b == settings_menu_button:
-
-                    current_settings = settings(current_settings)
-                    window = pygame.display.set_mode((current_settings.window_width, current_settings.window_height))  
+                    current_settings = settings(current_settings,load_assets)
+                    pygame.display.set_mode((current_settings.window_width, current_settings.window_height))  
+                    window = pygame.display.get_surface()
                     
                     for r in button_list:
                         r.resize(current_settings.window_width, current_settings.window_height,scaled_font(current_settings.window_height)) #Update all buttons to be proportional to the new resolution.
@@ -123,8 +127,10 @@ def main_menu(current_settings): #import current game state
                     for r in display_box_list:
                         r.resize(current_settings.window_width, current_settings.window_height,scaled_font(current_settings.window_height)) #Update all display boxes to be proportional to the new resolution.
                     
-                    logo = pygame.transform.scale(logo, (current_settings.window_width*0.5, current_settings.window_height*0.433))
-                    pygame.display.set_caption("BLOCKADE (main menu)")
+                    load_assets.blockade_logo_image = pygame.transform.scale(load_assets.blockade_logo_image, (current_settings.window_width*0.5, current_settings.window_height*0.433))
+                    load_assets.blockade_background_image = pygame.transform.scale(load_assets.blockade_background_image,(current_settings.window_width, current_settings.window_height))
+                    
+                    pygame.display.set_caption("BLOCKADE (main menu)") #Makes sure the caption returns to Blockade (main menu)
 
                 elif b == advice_button:
                     b.text = rand_item(advice_list)
@@ -134,7 +140,7 @@ def main_menu(current_settings): #import current game state
                     sys.exit() #Exit the software if this button is clicked.
 
         #drawing
-        window.blit(background, (0, 0)) #fill in the background
+        window.blit(load_assets.blockade_background_image, (0, 0)) #fill in the background
         
         for b in button_list:
             b.b_draw(window) #loop through all of the buttons and draw them onto the window.
@@ -143,6 +149,6 @@ def main_menu(current_settings): #import current game state
             b.b_draw(window)
         
 
-        window.blit(logo, (current_settings.window_width*0.45, current_settings.window_height*0.033)) #blit the logo
+        window.blit(load_assets.blockade_logo_image, (current_settings.window_width*0.45, current_settings.window_height*0.033)) #blit the logo
         
         pygame.display.update() #Updates the frames in the window.
