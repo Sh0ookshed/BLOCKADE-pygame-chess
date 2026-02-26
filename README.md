@@ -4,13 +4,13 @@ rust chess software with a pygame GUI. Officially named Blockade!
 <img src="assets/BLOCKADE LOGO.png" width="400" height="300" />
 
 # table of contents
-[what is this software](https://github.com/Sh0ookshed/BLOCKADE-pygame-chess?tab=readme-ov-file#what-is-this-software)
+[what is this software?](#what-is-this-software)
 
-[features](https://github.com/Sh0ookshed/BLOCKADE-pygame-chess?tab=readme-ov-file#features)
+[features](#features)
 
-[if you think this project is cool](https://github.com/Sh0ookshed/BLOCKADE-pygame-chess?tab=readme-ov-file#if-you-think-the-project-is-cool)
+[if you think this project is cool](#if-you-think-the-project-is-cool)
 
-[screenshots of the current program](https://github.com/Sh0ookshed/BLOCKADE-pygame-chess?tab=readme-ov-file#screenshots-of-the-current-program)
+[screenshots of the current program](#screenshots-of-the-current-program)
 
 # what is this software?
 This is a chess program that contains both back and front end allowing the user to play against a chess bot. I'm trying to make this in a unique way that allows for a python GUI using pygame and then a rust backend. These two will then be linked together using the PY03 module to turn the rust backend into python modules to allow for chess to be played in a pygame program that runs off of rust logic to improve speed and accuracy. It will have a variety of features and is designed to be used casually and will not link to any databases or external websites as it is an offline experience. 
