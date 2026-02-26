@@ -1,4 +1,4 @@
-# BLOCKADE
+# BLOCKADE PYGAME CHESS (written in pygame and rust)
 rust chess software with a pygame GUI. Officially named Blockade
 
 <img src="assets/BLOCKADE LOGO.png" width="400" height="300" />
@@ -23,6 +23,8 @@ I will include all of my documentation and planning for this project inside of t
 This project is a big learning experience for me as alongside creating it I am also learning how to use GIT /GitHub so forgive any poor early commits they hopefully get better.
 
 # Screenshots of the current program
+These screenshots are just to preview what the program looks like and more screenshots will come as the program is developed further
+
 **The main menu where you can access all other parts of the program:**
 <img width="800" height="800" alt="Screenshot 2026-01-29 112817" src="https://github.com/user-attachments/assets/d0f7d729-a5a8-412b-b6e4-22f51011f57e" /> <br>
 
